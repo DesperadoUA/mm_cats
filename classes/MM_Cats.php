@@ -71,9 +71,17 @@ class MM_Cats extends WP_Widget {
 			echo $args['after_widget'];
 		}
 	}
-	/*
-	public function update() {
 
+	public function update($new_instance, $old_instance) {
+
+		$new_instance['count'] = ( (int)$new_instance['count'] )
+			? abs($new_instance['count'])
+			: 4;
+
+		foreach ($new_instance['inc'] as $key => $value) {
+			$new_instance['inc'][$key] = (int)$value;
+		}
+
+		return $new_instance;
 	}
-	*/
 }
