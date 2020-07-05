@@ -48,8 +48,28 @@ class MM_Cats extends WP_Widget {
 		<?php
 	}
 
-	public function widget(){
+	public function widget($args, $instance) {
+		if(empty($instance['inc'])) return;
 
+		foreach ($instance['inc'] as $cat_id) {
+			$cat = get_category($cat_id);
+			$posts = get_posts([
+				'category' => $cat_id,
+				'numberposts' => $instance['count'],
+				'post_type' => 'tovar'
+			]);
+			echo $args['before_widget'];
+				echo $args['before_title'];
+					echo $cat->name;
+					echo "<ul>";
+						foreach ($posts as $item ) {
+							$permalink = get_permalink($item->ID);
+							echo "<li><a href='{$permalink}'>{$item->post_title}</a></li>";
+						}
+					echo "</ul>";
+				echo $args['after_title'];
+			echo $args['after_widget'];
+		}
 	}
 	/*
 	public function update() {
