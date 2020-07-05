@@ -1,7 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Костя
- * Date: 05.07.2020
- * Time: 11:06
- */
+include 'classes/MM_Cats.php';
+
+function mm_cats_widget() {
+	register_widget( 'MM_Cats' );
+}
